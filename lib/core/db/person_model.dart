@@ -5,8 +5,6 @@ part 'person_model.g.dart';
 @HiveType(typeId: 0)
 class PersonModel extends HiveObject {
   @HiveField(0)
-  int? id = Hive.generateSecureKey() as int?;
-  @HiveField(0)
   String? name;
   @HiveField(1)
   String? phone;
