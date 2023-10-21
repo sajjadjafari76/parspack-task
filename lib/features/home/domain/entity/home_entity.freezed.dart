@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'news_entity.dart';
+part of 'home_entity.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-NewsEntity _$NewsEntityFromJson(Map<String, dynamic> json) {
+HomeEntity _$NewsEntityFromJson(Map<String, dynamic> json) {
   return _NewsEntity.fromJson(json);
 }
 
@@ -30,15 +30,15 @@ mixin _$NewsEntity {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NewsEntityCopyWith<NewsEntity> get copyWith =>
+  $NewsEntityCopyWith<HomeEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NewsEntityCopyWith<$Res> {
   factory $NewsEntityCopyWith(
-          NewsEntity value, $Res Function(NewsEntity) then) =
-      _$NewsEntityCopyWithImpl<$Res, NewsEntity>;
+          HomeEntity value, $Res Function(HomeEntity) then) =
+      _$NewsEntityCopyWithImpl<$Res, HomeEntity>;
   @useResult
   $Res call(
       {String? title,
@@ -50,7 +50,7 @@ abstract class $NewsEntityCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NewsEntityCopyWithImpl<$Res, $Val extends NewsEntity>
+class _$NewsEntityCopyWithImpl<$Res, $Val extends HomeEntity>
     implements $NewsEntityCopyWith<$Res> {
   _$NewsEntityCopyWithImpl(this._value, this._then);
 
@@ -243,7 +243,7 @@ class _$_NewsEntity with DiagnosticableTreeMixin implements _NewsEntity {
   }
 }
 
-abstract class _NewsEntity implements NewsEntity {
+abstract class _NewsEntity implements HomeEntity {
   const factory _NewsEntity(
       {final String? title,
       final String? description,

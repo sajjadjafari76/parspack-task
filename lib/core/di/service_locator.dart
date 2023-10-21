@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app_clean_architecture/core/network/network_client.dart';
 import 'package:news_app_clean_architecture/core/shared/contants.dart';
-import 'package:news_app_clean_architecture/features/news/data/api/news_api.dart';
-import 'package:news_app_clean_architecture/features/news/data/repository/news_repository_impl.dart';
-import 'package:news_app_clean_architecture/features/news/domain/repository/news_repository.dart';
-import 'package:news_app_clean_architecture/features/news/domain/usecase/get_recent_news_usecase.dart';
-import 'package:news_app_clean_architecture/features/news/presentation/screens/bloc/main_news_bloc.dart';
+import 'package:news_app_clean_architecture/features/home/data/api/home_api.dart';
+import 'package:news_app_clean_architecture/features/home/data/repository/home_repository_impl.dart';
+import 'package:news_app_clean_architecture/features/home/domain/repository/home_repository.dart';
+import 'package:news_app_clean_architecture/features/home/domain/usecase/get_recent_home_usecase.dart';
+import 'package:news_app_clean_architecture/features/home/presentation/screens/bloc/main_home_bloc.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -17,11 +17,11 @@ setupServiceLocator() async {
   );
 
   // News
-  serviceLocator.registerFactory<MainNewsBloc>(() => MainNewsBloc());
-  serviceLocator.registerLazySingleton<NewsApi>(() => NewsApi(
+  serviceLocator.registerFactory<MainHomeBloc>(() => MainHomeBloc());
+  serviceLocator.registerLazySingleton<HomeApi>(() => HomeApi(
       dio: serviceLocator(), apiKey: serviceLocator<Constant>().apiKey));
-  serviceLocator.registerLazySingleton<NewsRepository>(() => NewsRepositoryImpl(
+  serviceLocator.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(
       newsApi: serviceLocator(), apiKey: serviceLocator<Constant>().apiKey));
-  serviceLocator.registerLazySingleton<GetRecentNewsUseCase>(
-      () => GetRecentNewsUseCase(serviceLocator()));
+  serviceLocator.registerLazySingleton<GetRecentHomeUseCase>(
+      () => GetRecentHomeUseCase(serviceLocator()));
 }
