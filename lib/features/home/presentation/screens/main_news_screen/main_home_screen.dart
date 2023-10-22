@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:news_app_clean_architecture/core/shared/button_component.dart';
 import 'package:news_app_clean_architecture/core/shared/color_constant.dart';
 import 'package:news_app_clean_architecture/core/shared/enums/gender_type.dart';
@@ -22,7 +23,7 @@ class MainHomeScreen extends StatelessWidget {
     return BlocConsumer<ResultBloc, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is MainHomeLoadingState) {
+          if (state.status.isInProgress) {
             return Container(
               color: background,
               child: const Center(
@@ -30,12 +31,12 @@ class MainHomeScreen extends StatelessWidget {
               ),
             );
           }
-          if (state is MainHomeErrorState) {
+          if (state.status.isFailure) {
             return Container(
               color: background,
               child: Center(
                 child: Text(
-                  state.message,
+                  state.status.name,
                   textAlign: TextAlign.center,
                 ),
               ),

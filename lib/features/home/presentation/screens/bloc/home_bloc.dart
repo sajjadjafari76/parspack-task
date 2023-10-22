@@ -15,7 +15,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class ResultBloc extends Bloc<HomeEvent, HomeState> {
-  ResultBloc() : super(MainHomeSuccessState()) {
+  ResultBloc() : super(const HomeState()) {
     // on<MainHomeGetRecentNewsEvent>(saveOnDB);
     on<LoginNameChanged>(_onNameChanged);
     on<LoginFamilyChanged>(_onFamilyChanged);
@@ -29,12 +29,8 @@ class ResultBloc extends Bloc<HomeEvent, HomeState> {
   ) {
     final name = Name.dirty(event.name);
     final nameq = state.name.value;
-    emit(
-      state.copyWith(
-        name: name,
-        isValid: true//Formz.validate([state.name, name]),
-      )
-    );
+    emit(state.copyWith(name: name, isValid: true //Formz.validate([state.name, name]),
+        ));
   }
 
   void _onFamilyChanged(
@@ -42,45 +38,37 @@ class ResultBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     final family = Family.dirty(event.family);
-    // emit(
-      state.copyWith(
-        family: family,
-        isValid: true//Formz.validate([family, state.family]),
-      );
-    // );
+    emit(state.copyWith(family: family, isValid: true //Formz.validate([family, state.family]),
+        ));
   }
 
   void _onMobileChanged(
     LoginMobileChanged event,
     Emitter<HomeState> emit,
   ) {
-    final mobile = Family.dirty(event.mobile);
-    // emit(
-      state.copyWith(
-        family: mobile,
-        isValid: true//Formz.validate([mobile, state.family]),
-      );
-    // );
+    final mobile = Mobile.dirty(event.mobile);
+    emit(state.copyWith(mobile: mobile, isValid: true //Formz.validate([mobile, state.family]),
+        ));
   }
 
   Future<void> _onSubmitted(
     BtnSubmitted event,
     Emitter<HomeState> emit,
   ) async {
-      emit(MainHomeLoadingState());
-      try {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    try {
+      PersonModel model = PersonModel(
+          name: state.name.value, family: state.family.value, phone: state.mobile.value, age: 0);
+      bool res = await serviceLocator<HomeUseCase>().call(model);
 
-        PersonModel model = PersonModel(name: state.name.value, family: state.family.value, phone: state.mobile.value, age: 0);
-        bool res = await serviceLocator<HomeUseCase>().call(model);
-
-        // await _authenticationRepository.logIn(
-        //   username: state.username.value,
-        //   password: state.password.value,
-        // );
-        emit(MainHomeSuccessState());
-      } catch (_) {
-        emit(const MainHomeErrorState("Something Went Wrong"));
-      }
+      // await _authenticationRepository.logIn(
+      //   username: state.username.value,
+      //   password: state.password.value,
+      // );
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
+    } catch (_) {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    }
   }
 }
 

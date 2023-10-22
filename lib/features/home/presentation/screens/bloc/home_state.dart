@@ -32,30 +32,5 @@ class HomeState extends Equatable {
   }
 
   @override
-  List<Object> get props => [status, name, family];
-}
-
-// abstract class HomeState extends Equatable {
-//   @override
-//   List<Object> get props => [];
-// }
-
-class MainHomeInitialState extends HomeState {}
-
-class MainHomeLoadingState extends HomeState {}
-
-class MainHomeSuccessState extends HomeState {
-  // final List<HomeEntity> news;
-  const MainHomeSuccessState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class MainHomeErrorState extends HomeState {
-  final String message;
-  const MainHomeErrorState(this.message);
-
-  @override
-  List<Object> get props => [message];
+  List<Object> get props => [status, name, family, mobile];
 }
