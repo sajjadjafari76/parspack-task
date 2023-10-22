@@ -3,20 +3,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'home_entity.freezed.dart';
-part 'home_entity.g.dart';
+part 'result_entity.freezed.dart';
+part 'result_entity.g.dart';
 
 @freezed
-class HomeEntity with _$HomeEntity {
-  const factory HomeEntity({
+class ResultEntity with _$ResultEntity {
+  const factory ResultEntity({
     String? title,
     String? description,
     String? url,
     @JsonKey(name: 'urlToImage') String? imageUrl,
     String? publishedAt,
     String? content,
-  }) = _HomeEntity;
+  }) = _ResultEntity;
 
-  factory HomeEntity.fromJson(Map<String, Object?> json) =>
-      _$HomeEntityFromJson(json);
+  factory ResultEntity.fromJson(Map<String, Object?> json) =>
+      _$ResultEntityFromJson(json);
 }

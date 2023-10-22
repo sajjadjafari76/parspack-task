@@ -49,11 +49,14 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.1.0
+  formz: ^0.6.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   hive_generator: ^2.0.1
+
   build_runner: ^2.4.6
+
 
   flutter_test:
     sdk: flutter
@@ -80,17 +83,21 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: dana_light
+      fonts:
+        - asset: fonts/dana_light.ttf
+    - family: dana_medium
+      fonts:
+        - asset: fonts/dana_medium.ttf
+    - family: dana_regular
+      fonts:
+        - asset: fonts/dana_regular.ttf
+    - family: dana_demiBold
+      fonts:
+        - asset: fonts/dana_demibold.ttf
+    - family: dana_bold
+      fonts:
+        - asset: fonts/dana_bold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -144,6 +143,7 @@ class PhoneNumberTextField extends StatefulWidget {
       this.validator,
       this.helperText,
       this.controller,
+      this.txtChange,
       this.errorText})
       : super(key: key);
 
@@ -155,6 +155,7 @@ class PhoneNumberTextField extends StatefulWidget {
   final TextEditingController? controller;
   final StringValidator? validator;
   final TextAlign textAlign;
+  final Function(String txt)? txtChange;
 
   @override
   State<PhoneNumberTextField> createState() => _PhoneNumberTextField();
@@ -206,6 +207,9 @@ class _PhoneNumberTextField extends State<PhoneNumberTextField> {
               // validator: CheckIsPhoneNumberValidator(),
               textAlign: widget.textAlign,
               inputType: TextInputType.number,
+              txtChange: (txt) {
+                widget.txtChange?.call(txt);
+              },
             ),
           ),
         ],

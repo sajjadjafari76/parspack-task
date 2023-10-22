@@ -1,4 +1,6 @@
 import 'package:persian_number_utility/persian_number_utility.dart';
+import 'package:formz/formz.dart';
+
 
 abstract class StringValidator {
   bool isValid(String value);
@@ -60,4 +62,47 @@ class InputValidators {
   final StringValidator phoneNumberValidator = CheckIsPhoneNumberValidator();
   final StringValidator emptyValidator = CheckIsEmptyValidator();
   final String invalidEmailErrorText = 'Email is wrong';
+}
+
+
+
+enum NameValidationError { empty }
+
+class Name extends FormzInput<String, NameValidationError> {
+  const Name.pure() : super.pure('');
+  const Name.dirty([super.value = '']) : super.dirty();
+
+  @override
+  NameValidationError? validator(String value) {
+    if (value.isEmpty) return NameValidationError.empty;
+    return null;
+  }
+}
+
+
+enum FamilyValidationError { empty }
+
+class Family extends FormzInput<String, FamilyValidationError> {
+  const Family.pure() : super.pure('');
+  const Family.dirty([super.value = '']) : super.dirty();
+
+  @override
+  FamilyValidationError? validator(String value) {
+    if (value.isEmpty) return FamilyValidationError.empty;
+    return null;
+  }
+}
+
+
+enum MobileValidationError { empty }
+
+class Mobile extends FormzInput<String, MobileValidationError> {
+  const Mobile.pure() : super.pure('');
+  const Mobile.dirty([super.value = '']) : super.dirty();
+
+  @override
+  MobileValidationError? validator(String value) {
+    if (value.isEmpty) return MobileValidationError.empty;
+    return null;
+  }
 }

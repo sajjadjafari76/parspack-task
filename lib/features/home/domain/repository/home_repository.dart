@@ -1,5 +1,6 @@
-import 'package:news_app_clean_architecture/features/home/domain/entity/home_entity.dart';
+
+import 'package:news_app_clean_architecture/core/db/person_model.dart';
 
 abstract class HomeRepository {
-  Future<List<HomeEntity>> getRecentNews();
+    Future<bool> saveInfo(PersonModel person);
 }
