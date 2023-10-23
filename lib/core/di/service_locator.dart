@@ -30,11 +30,9 @@ setupServiceLocator() async {
   serviceLocator.registerLazySingleton<HomeUseCase>(() => HomeUseCase(serviceLocator()));
 
   // Result
+  serviceLocator.registerFactory<ResultBloc>(() => ResultBloc());
   serviceLocator.registerLazySingleton<ResultApi>(() => ResultApi(dio: serviceLocator()));
   serviceLocator
       .registerLazySingleton<ResultRepositoryImpl>(() => ResultRepositoryImpl(newsApi: serviceLocator(), apiKey: serviceLocator<Constant>().apiKey));
   serviceLocator.registerLazySingleton<ResultUseCase>(() => ResultUseCase(serviceLocator()));
-  serviceLocator.registerFactory<ResultBloc>(() => ResultBloc());
-
-
 }
