@@ -9,26 +9,27 @@ import 'package:news_app_clean_architecture/features/result/presentation/screens
 class AppRouter {
   GoRouter generateRoute() {
     return GoRouter(
-        initialLocation: '/result',
-        routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) {
-          return BlocProvider.value(
-            value: serviceLocator<HomeBloc>(),
-            child:  MainHomeScreen(),
-          );
-        },
-      ),
-      GoRoute(
-        path: '/result',
-        builder: (context, state) {
-          return BlocProvider.value(
-            value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
-            child:  const ResultHomeScreen(),
-          );
-        },
-      ),
-    ]);
+      initialLocation: '/home',
+      routes: [
+        GoRoute(
+          path: '/home',
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: serviceLocator<HomeBloc>(),
+              child: MainHomeScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: '/result',
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
+              child: const ResultHomeScreen(),
+            );
+          },
+        ),
+      ],
+    );
   }
 }

@@ -1,5 +1,6 @@
+
+
 import 'package:news_app_clean_architecture/core/db/person_model.dart';
-import 'package:news_app_clean_architecture/features/home/domain/repository/home_repository.dart';
 import 'package:news_app_clean_architecture/features/result/domain/repository/result_repository.dart';
 
 class ResultUseCase {

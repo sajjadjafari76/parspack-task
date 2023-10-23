@@ -57,28 +57,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      PersonModel model = PersonModel(
-          name: state.name.value, family: state.family.value, phone: state.mobile.value, age: 0);
+      PersonModel model = PersonModel(name: state.name.value, family: state.family.value, phone: state.mobile.value, gender: 0);
       bool res = await serviceLocator<HomeUseCase>().call(model);
-      print(res);
 
-      // await _authenticationRepository.logIn(
-      //   username: state.username.value,
-      //   password: state.password.value,
-      // );
+      if (res) {}
+
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (_) {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
 }
-
-// FutureOr<void> saveOnDB(MainHomeGetRecentNewsEvent event, Emitter<HomeState> emit) async {
-//   try {
-//     emit(MainHomeLoadingState());
-//     List<HomeEntity> news = await serviceLocator<GetRecentHomeUseCase>().call();
-//     emit(MainHomeSuccessState(news));
-//   } catch (e) {
-//     emit(const MainHomeErrorState("Something Went Wrong"));
-//   }
-// }

@@ -14,7 +14,7 @@ import 'package:news_app_clean_architecture/features/home/domain/entity/home_ent
 import 'package:news_app_clean_architecture/features/home/presentation/screens/bloc/home_bloc.dart';
 
 class MainHomeScreen extends StatelessWidget {
-  MainHomeScreen({super.key});
+  const MainHomeScreen({super.key});
 
   // GlobalObjectKey<FormState> globalKey = GlobalObjectKey<FormState>(Random.secure().nextInt(1000));
 
@@ -42,75 +42,72 @@ class MainHomeScreen extends StatelessWidget {
               ),
             );
           }
-            return Scaffold(
-              body: SafeArea(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
-                  decoration: const BoxDecoration(color: background),
-                  child: ListView(
-                    children: [
-                      TextFormFieldBase(
-                        title: 'نام',
-                        hintText: 'نام خود را وارد کنید',
-                        submitted: false,
-                        textAlign: TextAlign.right,
-                        validator: CheckIsEmptyValidator(),
-                        txtChange: (txt) {
-                          context.read<HomeBloc>().add(LoginNameChanged(txt));
+          return Scaffold(
+            body: SafeArea(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
+                decoration: const BoxDecoration(color: background),
+                child: ListView(
+                  children: [
+                    TextFormFieldBase(
+                      title: 'نام',
+                      hintText: 'نام خود را وارد کنید',
+                      submitted: false,
+                      textAlign: TextAlign.right,
+                      validator: CheckIsEmptyValidator(),
+                      txtChange: (txt) {
+                        context.read<HomeBloc>().add(LoginNameChanged(txt));
+                      },
+                    ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    TextFormFieldBase(
+                      title: 'نام خانوادگی',
+                      hintText: 'نام  خانوادگی خود را وارد کنید',
+                      submitted: false,
+                      textAlign: TextAlign.right,
+                      validator: CheckIsEmptyValidator(),
+                      txtChange: (txt) {
+                        context.read<HomeBloc>().add(LoginFamilyChanged(txt));
+                      },
+                    ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    PhoneNumberTextField(
+                      title: 'شماره موبایل',
+                      hintText: 'شماره موبایل خود را وارد کنید',
+                      submitted: false,
+                      validator: CheckIsEmptyValidator(),
+                      txtChange: (txt) {
+                        context.read<HomeBloc>().add(LoginMobileChanged(txt));
+                      },
+                    ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    SelectGender(
+                      title: 'جنسیت',
+                      hintTextOne: 'مرد',
+                      hintTextTwo: 'زن',
+                      type: GenderType.MAN,
+                      onClick: (GenderType type) => {},
+                    ),
+                    const SizedBox(
+                      height: 44.0,
+                    ),
+                    ElevatedButtonBase(
+                        title: 'ذخیره',
+                        onPressed: () {
+                          context.read<HomeBloc>().add(BtnSubmitted());
                         },
-                      ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                      TextFormFieldBase(
-                        title: 'نام خانوادگی',
-                        hintText: 'نام  خانوادگی خود را وارد کنید',
-                        submitted: false,
-                        textAlign: TextAlign.right,
-                        validator: CheckIsEmptyValidator(),
-                        txtChange: (txt) {
-                          context.read<HomeBloc>().add(LoginFamilyChanged(txt));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                      PhoneNumberTextField(
-                        title: 'شماره موبایل',
-                        hintText: 'شماره موبایل خود را وارد کنید',
-                        submitted: false,
-                        validator: CheckIsEmptyValidator(),
-                        txtChange: (txt) {
-                          context.read<HomeBloc>().add(LoginMobileChanged(txt));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                      SelectGender(
-                        title: 'جنسیت',
-                        hintTextOne: 'مرد',
-                        hintTextTwo: 'زن',
-                        type: GenderType.MAN,
-                        onClick: (GenderType type) => {},
-                      ),
-                      const SizedBox(
-                        height: 44.0,
-                      ),
-                      ElevatedButtonBase(
-                          title: 'ذخیره',
-                          onPressed: () {
-                            // if (globalKey.currentState!.validate()) {
-                            // context.read<HomeBloc>().add(MainHomeGetRecentNewsEvent());
-                            context.read<HomeBloc>().add(BtnSubmitted());
-                            // }
-                          },
-                          style: md16(color: white))
-                    ],
-                  ),
+                        style: md16(color: white))
+                  ],
                 ),
               ),
-            );
+            ),
+          );
         });
   }
 }

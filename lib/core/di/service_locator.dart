@@ -10,6 +10,7 @@ import 'package:news_app_clean_architecture/features/home/domain/usecase/home_us
 import 'package:news_app_clean_architecture/features/home/presentation/screens/bloc/home_bloc.dart';
 import 'package:news_app_clean_architecture/features/result/data/api/result_api.dart';
 import 'package:news_app_clean_architecture/features/result/data/repository/result_repository_impl.dart';
+import 'package:news_app_clean_architecture/features/result/domain/repository/result_repository.dart';
 import 'package:news_app_clean_architecture/features/result/domain/usecase/result_usecase.dart';
 import 'package:news_app_clean_architecture/features/result/presentation/screens/bloc/result_bloc.dart';
 
@@ -30,9 +31,10 @@ setupServiceLocator() async {
   serviceLocator.registerLazySingleton<HomeUseCase>(() => HomeUseCase(serviceLocator()));
 
   // Result
-  serviceLocator.registerFactory<ResultBloc>(() => ResultBloc());
+
   serviceLocator.registerLazySingleton<ResultApi>(() => ResultApi(dio: serviceLocator()));
   serviceLocator
-      .registerLazySingleton<ResultRepositoryImpl>(() => ResultRepositoryImpl(newsApi: serviceLocator(), apiKey: serviceLocator<Constant>().apiKey));
+      .registerLazySingleton<ResultRepository>(() => ResultRepositoryImpl(resultApi: serviceLocator()));
   serviceLocator.registerLazySingleton<ResultUseCase>(() => ResultUseCase(serviceLocator()));
+  serviceLocator.registerFactory<ResultBloc>(() => ResultBloc());
 }

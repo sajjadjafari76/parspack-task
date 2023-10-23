@@ -11,7 +11,7 @@ class PersonModel extends HiveObject {
   @HiveField(2)
   String phone;
   @HiveField(3)
-  int age;
+  int gender;
 
-  PersonModel({required this.name, required this.family, required this.phone, required this.age});
+  PersonModel({required this.name, required this.family, required this.phone, required this.gender});
 }

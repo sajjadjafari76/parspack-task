@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_clean_architecture/core/shared/color_constant.dart';
+import 'package:news_app_clean_architecture/core/shared/font_constant.dart';
 import 'package:news_app_clean_architecture/core/shared/shadow_constant.dart';
 import 'package:news_app_clean_architecture/features/result/presentation/screens/bloc/result_bloc.dart';
 
@@ -34,6 +35,15 @@ class ResultHomeScreen extends StatelessWidget {
           );
         }
         if (state is ResultSuccessState) {
+          if (state.person.isEmpty) {
+            return Container(
+              color: white,
+              child: Center(
+                child: Text('رکوردی یافت نشد', style: md16(),),
+              ),
+            );
+          }
+
           return Scaffold(
             body: SafeArea(
               child: Container(
@@ -45,17 +55,21 @@ class ResultHomeScreen extends StatelessWidget {
                       return Container(
                         margin: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
                         decoration: const BoxDecoration(
-                          boxShadow: [
-                            shadowXS
-                          ]
+                            boxShadow: [
+                              shadowXS
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            color: white
                         ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
 
-                            Text('name is : ${state.person[item].name}'),
-                            Text('family is : ${state.person[item].family}'),
-                            Text('mobile is : ${state.person[item].phone}'),
-                            Text('age is : ${state.person[item].age}'),
+                            Text('نام  : ${state.person[item].name}', style: md12(),),
+                            Text('فامیلی  : ${state.person[item].family}', style: md12(),),
+                            Text('شماره موبایل : ${state.person[item].phone}', style: md12(),),
+                            Text('جنسیت  : ${state.person[item].gender}', style: md12(),),
 
                           ],
                         ),
