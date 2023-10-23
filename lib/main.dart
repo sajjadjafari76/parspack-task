@@ -6,6 +6,8 @@ import 'package:news_app_clean_architecture/core/di/service_locator.dart';
 import 'package:news_app_clean_architecture/features/app/app.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'features/app/routes.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var path = "/assets/db";
@@ -13,10 +15,22 @@ void main() async {
     var appDocDir = await getApplicationDocumentsDirectory();
     path = appDocDir.path;
   }
-  Hive.init(path) ;
+  Hive.init(path);
   Hive.registerAdapter(PersonModelAdapter());
   await Hive.openBox<PersonModel>('person_box'); // Open the box with the correct type
 
   await setupServiceLocator();
-  runApp(const MainApp());
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      title: 'parspack',
+      routerConfig: AppRouter().generateRoute(),
+    );
+  }
 }

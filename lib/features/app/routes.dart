@@ -7,39 +7,40 @@ import 'package:news_app_clean_architecture/features/home/presentation/screens/m
 import 'package:news_app_clean_architecture/features/result/presentation/screens/bloc/result_bloc.dart';
 import 'package:news_app_clean_architecture/features/result/presentation/screens/main_news_screen/result_home_screen.dart';
 
+import 'app.dart';
+
 class AppRouter {
   GoRouter generateRoute() {
     return GoRouter(
       navigatorKey: GlobalKey<NavigatorState>(),
-      initialLocation: '/home',
-      routes: [
-        ShellRoute(
-          builder: (context, state, child) {
-            return Container(
-              color: Colors.cyanAccent,
-              child: Text(child.key.toString()),
+      initialLocation: '/',
+       routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: serviceLocator<HomeBloc>(),
+              child: const MainPage(),
             );
           },
-          routes: [
-            GoRoute(
-              path: '/home',
-              builder: (context, state) {
-                return BlocProvider.value(
-                  value: serviceLocator<HomeBloc>(),
-                  child: const MainHomeScreen(),
-                );
-              },
-            ),
-            GoRoute(
-              path: '/result',
-              builder: (context, state) {
-                return BlocProvider.value(
-                  value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
-                  child: const ResultHomeScreen(),
-                );
-              },
-            ),
-          ],
+        ),
+        GoRoute(
+          path: '/home',
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: serviceLocator<HomeBloc>(),
+              child: const MainHomeScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: '/result',
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
+              child: const ResultHomeScreen(),
+            );
+          },
         ),
       ],
     );
