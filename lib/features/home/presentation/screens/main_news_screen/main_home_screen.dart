@@ -20,7 +20,7 @@ class MainHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ResultBloc, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {
           if (state.status.isInProgress) {
@@ -56,7 +56,7 @@ class MainHomeScreen extends StatelessWidget {
                         textAlign: TextAlign.right,
                         validator: CheckIsEmptyValidator(),
                         txtChange: (txt) {
-                          context.read<ResultBloc>().add(LoginNameChanged(txt));
+                          context.read<HomeBloc>().add(LoginNameChanged(txt));
                         },
                       ),
                       const SizedBox(
@@ -69,7 +69,7 @@ class MainHomeScreen extends StatelessWidget {
                         textAlign: TextAlign.right,
                         validator: CheckIsEmptyValidator(),
                         txtChange: (txt) {
-                          context.read<ResultBloc>().add(LoginFamilyChanged(txt));
+                          context.read<HomeBloc>().add(LoginFamilyChanged(txt));
                         },
                       ),
                       const SizedBox(
@@ -81,7 +81,7 @@ class MainHomeScreen extends StatelessWidget {
                         submitted: false,
                         validator: CheckIsEmptyValidator(),
                         txtChange: (txt) {
-                          context.read<ResultBloc>().add(LoginMobileChanged(txt));
+                          context.read<HomeBloc>().add(LoginMobileChanged(txt));
                         },
                       ),
                       const SizedBox(
@@ -102,7 +102,7 @@ class MainHomeScreen extends StatelessWidget {
                           onPressed: () {
                             // if (globalKey.currentState!.validate()) {
                             // context.read<HomeBloc>().add(MainHomeGetRecentNewsEvent());
-                            context.read<ResultBloc>().add(BtnSubmitted());
+                            context.read<HomeBloc>().add(BtnSubmitted());
                             // }
                           },
                           style: md16(color: white))

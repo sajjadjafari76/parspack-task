@@ -14,10 +14,10 @@ part 'result_state.dart';
 
 class ResultBloc extends Bloc<ResultEvent, ResultState> {
   ResultBloc() : super(ResultLoadingState()) {
-    on<MainHomeGetRecentNewsEvent>(getDataFromDb);
+    on<ResultGetRecentNewsEvent>(_getDataFromDb);
   }
 
-  FutureOr<void> getDataFromDb(MainHomeGetRecentNewsEvent event, Emitter<ResultState> emit) async {
+  FutureOr<void> _getDataFromDb(ResultGetRecentNewsEvent event, Emitter<ResultState> emit) async {
     try {
       emit(ResultLoadingState());
       List<PersonModel> news = await serviceLocator<ResultUseCase>().call();

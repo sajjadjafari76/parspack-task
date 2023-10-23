@@ -9,8 +9,6 @@ import 'package:news_app_clean_architecture/features/result/presentation/screens
 class ResultHomeScreen extends StatelessWidget {
   const ResultHomeScreen({super.key});
 
-  // GlobalObjectKey<FormState> globalKey = GlobalObjectKey<FormState>(Random.secure().nextInt(1000));
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ResultBloc, ResultState>(

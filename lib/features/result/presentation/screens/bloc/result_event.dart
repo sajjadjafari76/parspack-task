@@ -5,4 +5,4 @@ abstract class ResultEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class MainHomeGetRecentNewsEvent extends ResultEvent {}
+class ResultGetRecentNewsEvent extends ResultEvent {}

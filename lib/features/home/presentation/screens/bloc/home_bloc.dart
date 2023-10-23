@@ -14,8 +14,8 @@ part 'home_event.dart';
 
 part 'home_state.dart';
 
-class ResultBloc extends Bloc<HomeEvent, HomeState> {
-  ResultBloc() : super(const HomeState()) {
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  HomeBloc() : super(const HomeState()) {
     // on<MainHomeGetRecentNewsEvent>(saveOnDB);
     on<LoginNameChanged>(_onNameChanged);
     on<LoginFamilyChanged>(_onFamilyChanged);
@@ -60,6 +60,7 @@ class ResultBloc extends Bloc<HomeEvent, HomeState> {
       PersonModel model = PersonModel(
           name: state.name.value, family: state.family.value, phone: state.mobile.value, age: 0);
       bool res = await serviceLocator<HomeUseCase>().call(model);
+      print(res);
 
       // await _authenticationRepository.logIn(
       //   username: state.username.value,
