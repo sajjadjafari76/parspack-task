@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
 import 'package:news_app_clean_architecture/core/db/person_model.dart';
 import 'package:news_app_clean_architecture/core/di/service_locator.dart';
 import 'package:news_app_clean_architecture/core/shared/validation.dart';
-import 'package:news_app_clean_architecture/features/home/domain/entity/home_entity.dart';
 import 'package:news_app_clean_architecture/features/home/domain/usecase/home_usecase.dart';
 
 part 'home_event.dart';
@@ -16,7 +14,6 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
-    // on<MainHomeGetRecentNewsEvent>(saveOnDB);
     on<LoginNameChanged>(_onNameChanged);
     on<LoginFamilyChanged>(_onFamilyChanged);
     on<LoginMobileChanged>(_onMobileChanged);
@@ -47,8 +44,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     final mobile = Mobile.dirty(event.mobile);
-    emit(state.copyWith(mobile: mobile, isValid: true //Formz.validate([mobile, state.family]),
-        ));
+    emit(
+      state.copyWith(mobile: mobile, isValid: true //Formz.validate([mobile, state.family]),
+          ),
+    );
   }
 
   Future<void> _onSubmitted(

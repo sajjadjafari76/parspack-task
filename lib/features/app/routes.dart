@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news_app_clean_architecture/core/di/service_locator.dart';
@@ -9,25 +10,36 @@ import 'package:news_app_clean_architecture/features/result/presentation/screens
 class AppRouter {
   GoRouter generateRoute() {
     return GoRouter(
+      navigatorKey: GlobalKey<NavigatorState>(),
       initialLocation: '/home',
       routes: [
-        GoRoute(
-          path: '/home',
-          builder: (context, state) {
-            return BlocProvider.value(
-              value: serviceLocator<HomeBloc>(),
-              child: MainHomeScreen(),
+        ShellRoute(
+          builder: (context, state, child) {
+            return Container(
+              color: Colors.cyanAccent,
+              child: Text(child.key.toString()),
             );
           },
-        ),
-        GoRoute(
-          path: '/result',
-          builder: (context, state) {
-            return BlocProvider.value(
-              value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
-              child: const ResultHomeScreen(),
-            );
-          },
+          routes: [
+            GoRoute(
+              path: '/home',
+              builder: (context, state) {
+                return BlocProvider.value(
+                  value: serviceLocator<HomeBloc>(),
+                  child: const MainHomeScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: '/result',
+              builder: (context, state) {
+                return BlocProvider.value(
+                  value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
+                  child: const ResultHomeScreen(),
+                );
+              },
+            ),
+          ],
         ),
       ],
     );

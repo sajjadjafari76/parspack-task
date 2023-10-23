@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:news_app_clean_architecture/core/di/service_locator.dart';
 import 'package:news_app_clean_architecture/core/shared/color_constant.dart';
 import 'package:news_app_clean_architecture/features/app/routes.dart';
@@ -10,7 +11,9 @@ import 'package:news_app_clean_architecture/features/result/presentation/screens
 import 'package:news_app_clean_architecture/features/result/presentation/screens/main_news_screen/result_home_screen.dart';
 
 class MainApp extends StatefulWidget {
-  const MainApp({super.key});
+  const MainApp({super.key, required this.child});
+
+  final Widget child;
 
   @override
   State<MainApp> createState() => _MainAppState();
@@ -30,10 +33,7 @@ class _MainAppState extends State<MainApp> {
           child: IndexedStack(
             index: pageIndex,
             children: [
-              BlocProvider.value(
-                value: serviceLocator<HomeBloc>(),
-                child: MainHomeScreen(),
-              ),
+              // GoRouter.of(context).go('/home'),
               BlocProvider.value(
                 value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
                 child: const ResultHomeScreen(),
