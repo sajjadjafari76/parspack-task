@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'parspack',
-      routerConfig: AppRouter().generateRoute(),
+      routerConfig: AppRouter().route(),
     );
   }
 }

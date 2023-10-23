@@ -10,37 +10,48 @@ import 'package:news_app_clean_architecture/features/result/presentation/screens
 import 'app.dart';
 
 class AppRouter {
-  GoRouter generateRoute() {
+  final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+  final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
+  GoRouter route(){
     return GoRouter(
-      navigatorKey: GlobalKey<NavigatorState>(),
-      initialLocation: '/',
-       routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) {
-            return BlocProvider.value(
-              value: serviceLocator<HomeBloc>(),
-              child: const MainPage(),
-            );
+      initialLocation: '/home',
+      navigatorKey: _rootNavigatorKey,
+      routes: [
+        ShellRoute(
+          navigatorKey: _shellNavigatorKey,
+          pageBuilder: (context, state, child) {
+            return NoTransitionPage(
+                child: ScaffoldWithNavBar(
+                  location: state.location,
+                  child: child,
+                ));
           },
-        ),
-        GoRoute(
-          path: '/home',
-          builder: (context, state) {
-            return BlocProvider.value(
-              value: serviceLocator<HomeBloc>(),
-              child: const MainHomeScreen(),
-            );
-          },
-        ),
-        GoRoute(
-          path: '/result',
-          builder: (context, state) {
-            return BlocProvider.value(
-              value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
-              child: const ResultHomeScreen(),
-            );
-          },
+          routes: [
+            GoRoute(
+              path: '/home',
+              parentNavigatorKey: _shellNavigatorKey,
+              pageBuilder: (context, state) {
+                return   NoTransitionPage(
+                  child: BlocProvider.value(
+                    value: serviceLocator<HomeBloc>(),
+                    child: const MainHomeScreen(),
+                  ),
+                );
+              },
+            ),
+            GoRoute(
+                parentNavigatorKey: _shellNavigatorKey,
+                path: '/result',
+                pageBuilder: (context, state) {
+                  return   NoTransitionPage(
+                    child: BlocProvider.value(
+                      value: serviceLocator<ResultBloc>()..add(ResultGetRecentNewsEvent()),
+                      child: const ResultHomeScreen(),
+                    ),
+                  );
+                }, ),
+          ],
         ),
       ],
     );
